@@ -7,22 +7,31 @@ import csv
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
     texts = list(reader)
-    msg_numb_list=[]
-    call_no_message=[]
-    for msg in texts:
-        msg_numb_list.append(msg[0])
-        #print(msg[0])
-
 with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
-    for call in calls:
-        if call[0] not in msg_numb_list:
-            call_no_message.append(call[0])
 
-    call_no_message_set = set(call_no_message)
-    print("These numbers could be telemarketers: \n",call_no_message_set)
-#O(2N)
+    possible_mkt = []
+    # all calls made
+    for call in calls:
+        possible_mkt.append(call[0])
+    possible_mkt_set = set(possible_mkt)
+    # removing the ones who received calls
+    for call in calls:
+        if call[1] in possible_mkt_set:
+            possible_mkt_set.remove(str(call[1]))
+    # removing the ones who send txt and received
+    for msg in texts:
+        if msg[0] in possible_mkt_set:
+            possible_mkt_set.remove(str(msg[0]))
+        if msg[1] in possible_mkt_set:
+            possible_mkt_set.remove(str(msg[1]))
+
+    print("These numbers could be telemarketers: ")
+    for number in possible_mkt_set:
+        print(number)
+
+# O(2N)
 """
 TASK 4:
 The telephone company want to identify numbers that might be doing

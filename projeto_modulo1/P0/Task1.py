@@ -9,24 +9,25 @@ with open('texts.csv', 'r') as f:
     telnumbers=[]
     unic_numbers=[]
     for message in texts:
-        #print(message[0])
+
         if message[0] not in telnumbers:
             telnumbers.append(message[0])
         if message[1] not in telnumbers:
             telnumbers.append(message[1])
 
-    print(len(telnumbers))
+
 
 with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
     for call in calls:
-        if call[0][0] not in telnumbers:
-            telnumbers.append(call[0][0])
-        if call[0][1] not in telnumbers:
-            telnumbers.append(call[0][1])
-    print(len(telnumbers))
 
+        if call[0] not in telnumbers:
+            telnumbers.append(call[0])
+        if call[1] not in telnumbers:
+            telnumbers.append(call[1])
+
+#telnumbers is a list with all the unic phonenumbers(messages and phonecalls so i just count how many are in the list)
 print("There are {} different telephone numbers in the records.".format(len(telnumbers)))
 # O(2N)
 """

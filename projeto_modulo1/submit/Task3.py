@@ -12,19 +12,19 @@ with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
 
-    bangalore_fix=[]
-    bangalore_mob=[]
-    telemarketers=[]
-    called_by_bang=[]
-    called_to_bang=[]
+    bangalore_fix = []
+    bangalore_mob = []
+    telemarketers = []
+    called_by_bang = []
+    called_to_bang = []
     mobile=['7', '8', '9']
     for call in calls:
         if call[0].startswith("(080)"):
 
             bangalore_fix.append(call)
 
-        aux=len("080 ")+1
-        is_mobile=len(call[0])//2
+        aux = len("080 ")+1
+        is_mobile = len(call[0])//2
 
         if call[0][4] == "7" or call[0][4] == "8" or call[0][4] == "9":
 
@@ -34,7 +34,7 @@ with open('calls.csv', 'r') as f:
 
             telemarketers.append(call)
 
-    prefix_list=[]
+    prefix_list = []
     for call in bangalore_fix:
 
         if call[1].startswith("(080)"):
@@ -48,8 +48,10 @@ with open('calls.csv', 'r') as f:
 
             called_by_bang.append(call[1][0])
 
-    called_set= set(called_by_bang)
-    print("The numbers called by people in Bangalore have codes: \n",called_set)
+    called_set = set(called_by_bang)
+    print("The numbers called by people in Bangalore have codes:")
+    for x in called_set:
+        print(x)
     print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(round((len(called_to_bang)/len(called_by_bang))*100)))
 #O(2N)
 

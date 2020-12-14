@@ -1,5 +1,10 @@
-task 0 : For the worse case senario O(1)
-task 1 : For the worse case senario O(N2)
-task 2 : For the worse case senario O(N)
-task 3 : For the worse case senario O(N2)
-task 4 : For the worse case senario O(N2)
+task 0 : 
+For the worse case senario O(1), because is going to be always accessing the first and the last one there is no going over lists or anything no loops. just go straight to the point.
+task 1 :
+For the worse case senario O(N),here I have to access both datasets and go over both of them getting the unique numbers. It could be considered O(N) or O(2N)  because I used 2 loops to iterate over the input. but in that case both loops are to iterate over 2 diferent inputs I considered as both inputs as 2 parts of 1. That's why O(N).
+task 2 : 
+For the worse case senario O(N), here I have considered only as input the seccond file because is the only one necessary to solve this. And since I have to go over the whole file item by item to get my results is O(N).  
+task 3 : 
+For the worse case senario O(N), I considered O(N) because I iterate over all the whole input even that there are 2 "for" loops they are to iterate over the input that is separated in 2 files thats why I consider O(N). And then I iterate again over the results to show it line by line as requested by the reviwer since the result is already calculated I can't count as a multiplication over the N.
+task 4 : 
+For the worse case senario O(2N), Even that I have 4 "for" loops there only 2 of them iterate over the same input the other ones are:  one iterate over half input and the other one iterate over the result to show it line by line as requested by the reviewer. Because of this considering the worst case it would be O(2N).
