@@ -15,6 +15,7 @@ with open('calls.csv', 'r') as f:
     # all calls made
     for call in calls:
         possible_mkt.append(call[0])
+
     possible_mkt_set = set(possible_mkt)
     # removing the ones who received calls
     for call in calls:
@@ -28,7 +29,10 @@ with open('calls.csv', 'r') as f:
             possible_mkt_set.remove(str(msg[1]))
 
     print("These numbers could be telemarketers: ")
-    for number in possible_mkt_set:
+    # creating list to apply sort()
+    result_list = list(possible_mkt_set)
+    result_list.sort()
+    for number in result_list:
         print(number)
 
 # O(2N)

@@ -13,47 +13,41 @@ with open('calls.csv', 'r') as f:
     calls = list(reader)
 
     bangalore_fix = []
-    bangalore_mob = []
-    telemarketers = []
     called_by_bang = []
     called_to_bang = []
-    mobile=['7', '8', '9']
+    mobile = ['7', '8', '9']
+
     for call in calls:
         if call[0].startswith("(080)"):
+            if call[1].startswith("("):
+                limit=call[1].index(")")
+                bangalore_fix.append(call[1][1:limit])
+                called_by_bang.append(call[1])
 
-            bangalore_fix.append(call)
+                #starts with (, then get what is between ()
+            if call[1].startswith("140"):
+                bangalore_fix.append(140)
+                called_by_bang.append(call[1])
 
-        aux = len("080 ")+1
-        is_mobile = len(call[0])//2
+                # starts with 140 then add 140 to the list
+            if call[1][0] in mobile:
+                bangalore_fix.append(call[1][:5])
+                called_by_bang.append(call[1])
+                #starts with 7,8, or 9, then get the first 4 numbers.
+            if call[1].startswith("(080)"):
+                called_to_bang.append(call[1])
 
-        if call[0][4] == "7" or call[0][4] == "8" or call[0][4] == "9":
 
-            bangalore_mob.append(call)
-
-        if call[0].startswith("140"):
-
-            telemarketers.append(call)
-
-    prefix_list = []
-    for call in bangalore_fix:
-
-        if call[1].startswith("(080)"):
-            called_to_bang.append(call[1])
-        if call[1].startswith("("):
-            limit=call[1].index(")")
-
-            called_by_bang.append(call[1][:limit])
-
-        if call[1][0] in mobile:
-
-            called_by_bang.append(call[1][0])
-
-    called_set = set(called_by_bang)
+    bangalore_fix.sort()
+    codes_set = sorted(set(bangalore_fix))
     print("The numbers called by people in Bangalore have codes:")
-    for x in called_set:
+    for x in codes_set:
         print(x)
-    print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(round((len(called_to_bang)/len(called_by_bang))*100)))
-#O(2N)
+
+    percentage = ((len(called_to_bang)/len(called_by_bang))*100)
+    print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(round(percentage, 2)))
+
+# O(2N)
 
 """
 TASK 3:

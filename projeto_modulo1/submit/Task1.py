@@ -6,8 +6,8 @@ import csv
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
     texts = list(reader)
-    telnumbers=[]
-    unic_numbers=[]
+    telnumbers = []
+
     for message in texts:
 
         if message[0] not in telnumbers:

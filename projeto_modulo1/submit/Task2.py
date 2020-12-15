@@ -11,7 +11,6 @@ with open('texts.csv', 'r') as f:
 with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
-    print(calls[0])
 
     max_time = 0
     phone_num_max_time = ''
@@ -27,13 +26,11 @@ with open('calls.csv', 'r') as f:
         else:
             time_dic[call[1]] = int(call[-1])
 
-        # print(time_dic)
-
     for phone, time in time_dic.items():
         if int(max_time) < int(time):
             max_time = time
             phone_num_max_time = phone
-        # print(phone)
+
 
     print(" {} spent the longest time, {} seconds, on the phone during September 2016.".format(phone_num_max_time, max_time ))
 
