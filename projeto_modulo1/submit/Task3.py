@@ -31,14 +31,12 @@ with open('calls.csv', 'r') as f:
 
                 # starts with 140 then add 140 to the list
             if call[1][0] in mobile:
-                bangalore_fix.append(call[1][:5])
+                bangalore_fix.append(call[1][:4])
                 called_by_bang.append(call[1])
                 #starts with 7,8, or 9, then get the first 4 numbers.
             if call[1].startswith("(080)"):
                 called_to_bang.append(call[1])
 
-
-    bangalore_fix.sort()
     codes_set = sorted(set(bangalore_fix))
     print("The numbers called by people in Bangalore have codes:")
     for x in codes_set:
