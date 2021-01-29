@@ -4,26 +4,14 @@
 
 import os
 
-
 # Let us print the files in the directory in which you are running this script
-# print (os.listdir("."))
+print (os.listdir("."))
 
 # Let us check if this file is indeed a file!
-# print (os.path.isfile("./ex.py"))
+print (os.path.isfile("./ex.py"))
 
 # Does the file end with .py?
-# print ("./ex.py".endswith(".py"))
-
-def check_dir(path):
-    if os.path.isdir(path):
-        return True
-    else:
-        return False
-    # return paths
-
-
-def find_sub_folders(path):
-    return os.listdir(path)
+print ("./ex.py".endswith(".py"))
 
 
 def find_files(suffix, path):
@@ -42,21 +30,38 @@ def find_files(suffix, path):
     Returns:
        a list of paths
     """
-    # print(path)
-    # print (os.listdir(path))
+    list_of_paths = []
+    if suffix == "*":
 
-    paths = [path]
+        if not os.path.isdir(path):
+            list_of_paths.append(path)
+            return list_of_paths
+        else:
+            current_path = os.listdir(path)
+            for sub_path in current_path:
+                current_sub_path = os.path.join(path, sub_path)
 
-    if check_dir(path):
-        paths.append(path)
-        sub_folders = find_sub_folders(path)
-        for index in range(len(sub_folders)):
-            print(sub_folders[index])
-            if check_dir(sub_folders[index]):
-                print(sub_folders[index], True)
-            # sub_sub_folder = find_sub_folders(folder)
-            # for item in sub_sub_folder:
-            #	print(item)
+                list_of_paths.append(current_sub_path)
+                list_of_paths.append(find_files("*", current_sub_path))
+
+            return  list_of_paths       #print(list_of_paths)
+    else:
+        #list_of_paths = []
+        if not os.path.isdir(path):
+            if path.endswith(suffix):
+                list_of_paths.append(path)
+                return list_of_paths
+        else:
+            current_path = os.listdir(path)
+            for sub_path in current_path:
+                current_sub_path = os.path.join(path, sub_path)
+                if current_sub_path.endswith(suffix):
+                    list_of_paths.append(current_sub_path)
+                list_of_paths.append(find_files(suffix, current_sub_path))
+                #print(list_of_paths)
 
 
-print(find_files('*', './testdir'))
+            return list_of_paths
+
+print(find_files( ".h", "."))
+
