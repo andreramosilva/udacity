@@ -34,6 +34,7 @@ class TreeNode:
 
 
 class HuffmanTree:
-    def __init__(self, value=None):
-        self.root = TreeNode(value)
+    def __init__(self, node=None):
+        self.root = node
+        self.tail = None
 
