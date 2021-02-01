@@ -1,0 +1,1 @@
+# for the problem 1 i used a dicionary and a list the idea was to create a list to keep track on the calls made on the items on my cache so i can easily delete the one tha was least used when needed because i search only on the dicionary is O(1) to find the data
