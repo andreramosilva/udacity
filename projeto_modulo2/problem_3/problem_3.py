@@ -1,12 +1,13 @@
 import sys
 import models as md
 
+
 class MinHeap:
-    def __init__(self,maxsize,val0):
+    def __init__(self, maxsize, val0):
         self.maxsize = maxsize
         self.size = 0
         self.Heap = [0]*(self.maxsize+1)
-        self.Heap[0] = val0 #-1 * sys.maxsize
+        self.Heap[0] = val0  # -1 * sys.maxsize
         self.FRONT = 1
 
     def parent(self, pos):
@@ -33,14 +34,14 @@ class MinHeap:
                     self.swap(pos, self.left_child(pos))
                     self.min_heapify(self.left_child(pos))
                 else:
-                    self.swap(pos,self.right_child(pos))
+                    self.swap(pos, self.right_child(pos))
                     self.min_heapify(self.right_child(pos))
 
-    def insert(self,element):
+    def insert(self, element):
         if self.size >= self.maxsize:
             return
-        self.size+=1
-        self.Heap[self.size]=element
+        self.size += 1
+        self.Heap[self.size] = element
 
         current = self.size
 
@@ -67,6 +68,7 @@ class MinHeap:
         self.min_heapify(self.FRONT)
         return popped
 
+
 def test_MinHeap():
     print('The minHeap is ')
     minHeap = MinHeap(15)
@@ -87,20 +89,23 @@ def test_MinHeap():
 def huffman_encoding(data):
     pass
 
-def huffman_decoding(data,tree):
+
+def huffman_decoding(data, tree):
     pass
+
 
 def frequency_char_in_string(string):
     frequency = {}
     for char in string:
-        frequency[char]=string.count(char)
+        frequency[char] = string.count(char)
 
     return frequency
 
+
 def add_tree_nodes_to_heap(frequency_dic):
     print(frequency_dic)
-    nodes_heap = MinHeap(len(frequency_dic)-1, md.TreeNode(" ", frequency_dic[" "]))
-
+    nodes_heap = MinHeap(len(frequency_dic)-1,
+                         md.TreeNode(" ", frequency_dic[" "]))
 
     for index in frequency_dic:
 
@@ -108,10 +113,8 @@ def add_tree_nodes_to_heap(frequency_dic):
 
         nodes_heap.insert(node)
 
-    #nodes_heap.print_heap()
+    # nodes_heap.print_heap()
     print(nodes_heap.min_heap())
-
-
 
 
 if __name__ == "__main__":
@@ -119,8 +122,9 @@ if __name__ == "__main__":
 
     a_great_sentence = "The bird is the word"
     add_tree_nodes_to_heap(frequency_char_in_string(a_great_sentence))
-    print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
-    print ("The content of the data is: {}\n".format(a_great_sentence))
+    print("The size of the data is: {}\n".format(
+        sys.getsizeof(a_great_sentence)))
+    print("The content of the data is: {}\n".format(a_great_sentence))
 
    # encoded_data, tree = huffman_encoding(a_great_sentence)
 
