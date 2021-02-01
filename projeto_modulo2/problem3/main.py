@@ -2,11 +2,11 @@ import sys
 import models as md
 
 class MinHeap:
-    def __init__(self,maxsize):
+    def __init__(self,maxsize,val0):
         self.maxsize = maxsize
         self.size = 0
         self.Heap = [0]*(self.maxsize+1)
-        self.Heap[0] = -1 * sys.maxsize
+        self.Heap[0] = val0 #-1 * sys.maxsize
         self.FRONT = 1
 
     def parent(self, pos):
@@ -19,7 +19,7 @@ class MinHeap:
         return (2*pos)+1
 
     def is_leaf(self, pos):
-        if pos.frequency >= (self.size//2) and pos.frequency <= self.size:
+        if pos >= (self.size//2) and pos <= self.size:
             return True
         return False
 
@@ -44,7 +44,7 @@ class MinHeap:
 
         current = self.size
 
-        while self.Heap[current] < self.Heap[self.parent(current)]:
+        while self.Heap[current].frequency < self.Heap[self.parent(current)].frequency:
             self.swap(current, self.parent(current))
             current = self.parent(current)
 
@@ -52,7 +52,7 @@ class MinHeap:
         for i in range(1, (self.size//2)+1):
             print(i, 2 * i, 2 * i + 1)
             print("Parent: " + str(self.Heap[i].value) + " " + str(self.Heap[i].frequency)+" Left child: " +
-                  str(self.Heap[2 * i]) + " " + str(self.Heap[2 * i])+" right child: " +
+                  str(self.Heap[2 * i].value) + " " + str(self.Heap[2 * i].frequency)+" right child: " +
                   str(self.Heap[2 * i + 1].value) +
                   " " + str(self.Heap[2 * i + 1].frequency))
 
@@ -98,15 +98,18 @@ def frequency_char_in_string(string):
     return frequency
 
 def add_tree_nodes_to_heap(frequency_dic):
-    #print(len(frequency_dic))
-    nodes_heap = MinHeap(len(frequency_dic)-1)
+    print(frequency_dic)
+    nodes_heap = MinHeap(len(frequency_dic)-1, md.TreeNode(" ", frequency_dic[" "]))
 
-    for item in frequency_dic:
-        #print(item, frequency_dic[item])
-        print(md.TreeNode(item, frequency_dic[item]))
-        nodes_heap.insert(md.TreeNode(item, frequency_dic[item]))
-        #nodes_heap.print_heap()
-    nodes_heap.print_heap()
+
+    for index in frequency_dic:
+
+        node = md.TreeNode(index, frequency_dic[index])
+
+        nodes_heap.insert(node)
+
+    #nodes_heap.print_heap()
+    print(nodes_heap.min_heap())
 
 
 
