@@ -63,5 +63,10 @@ def find_files(suffix, path):
 
             return list_of_paths
 
+## Test cases :
 print(find_files( ".h", "."))
+
+print(find_files( "", "."))
+
+print(find_files(".c", "."))
 

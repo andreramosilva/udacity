@@ -65,7 +65,8 @@ def intersection(llist_1, llist_2):
     list_1 = ll_to_list(llist_1)
     list_2 = ll_to_list(llist_2)
 
-    return list(set(list_1) & set(list_2))
+    list_3 = [value for value in list_1 if value in list_2]
+    return list_3
 
 
 
