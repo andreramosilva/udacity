@@ -1,4 +1,12 @@
-# on this problem i was not able to finish thats as far i could get, i tried to create a min-heap to order the tree nodes, and using it to create the huffman but o got stuck at this point I really need help to finish this.
+### Design:
+<details about implementation such as data structures and algorithms used>
+
+### Time Complexity:
+<Big O notation with brief explanation>
+
+### Space Complexity:
+<Big O notation with brief explanation>
+
 
 https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/
 

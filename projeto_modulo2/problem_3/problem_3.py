@@ -1,120 +1,146 @@
 import sys
 import models as md
 
+LEFT_BIT = "0"
+RIGHT_BIT = "1"
 
 class MinHeap:
-    def __init__(self, maxsize, val0):
-        self.maxsize = maxsize
+    def __init__(self, capacity = 10):
+        self.array = [None] * capacity
         self.size = 0
-        self.Heap = [0]*(self.maxsize+1)
-        self.Heap[0] = val0  # -1 * sys.maxsize
-        self.FRONT = 1
 
-    def parent(self, pos):
-        return pos//2
+    def insert(self,value):
 
-    def left_child(self, pos):
-        return 2 * pos
+        if self.size == len(self.array):
+            new_array = [None] *(2*len(self.array))
+            for i, element in enumerate(self.array):
+                new_array[i] = element
+            self.array = new_array
 
-    def right_child(self, pos):
-        return (2*pos)+1
+        index = self.size
+        self.array[index] = value
 
-    def is_leaf(self, pos):
-        if pos >= (self.size//2) and pos <= self.size:
-            return True
-        return False
-
-    def swap(self, fpos, spos):
-        self.Heap[fpos], self.Heap[spos] = self.Heap[spos], self.Heap[fpos]
-
-    def min_heapify(self, pos):
-        if not self.is_leaf(pos):
-            if (self.Heap[pos].frequency > self.Heap[self.left_child(pos)].frequency) or self.Heap[pos].frequency > self.Heap[self.right_child(pos)].frequency:
-                if self.Heap[self.left_child(pos)].frequency < self.Heap[self.right_child(pos)].frequency:
-                    self.swap(pos, self.left_child(pos))
-                    self.min_heapify(self.left_child(pos))
-                else:
-                    self.swap(pos, self.right_child(pos))
-                    self.min_heapify(self.right_child(pos))
-
-    def insert(self, element):
-        if self.size >= self.maxsize:
-            return
+        while (index > 0):
+            parent_index = (index - 1) // 2
+            if self.array[index] < self.array[parent_index]:
+                self.array[index],self.array[parent_index] = self.array[parent_index], self.array[index]
+                index = parent_index
+            else:
+                break
         self.size += 1
-        self.Heap[self.size] = element
 
-        current = self.size
+    def get_min(self):
+        return self.array[0]
 
-        while self.Heap[current].frequency < self.Heap[self.parent(current)].frequency:
-            self.swap(current, self.parent(current))
-            current = self.parent(current)
+    def delete_min(self):
+        if self.size == 0:
+            return
 
-    def print_heap(self):
-        for i in range(1, (self.size//2)+1):
-            print(i, 2 * i, 2 * i + 1)
-            print("Parent: " + str(self.Heap[i].value) + " " + str(self.Heap[i].frequency)+" Left child: " +
-                  str(self.Heap[2 * i].value) + " " + str(self.Heap[2 * i].frequency)+" right child: " +
-                  str(self.Heap[2 * i + 1].value) +
-                  " " + str(self.Heap[2 * i + 1].frequency))
-
-    def min_heap(self):
-        for pos in range(self.size // 2, 0, -1):
-            self.min_heapify(pos)
-
-    def remove(self):
-        popped = self.Heap[self.FRONT]
-        self.Heap[self.FRONT] = self.Heap[self.size]
         self.size -= 1
-        self.min_heapify(self.FRONT)
-        return popped
+        self.array[0] = self.array[self.size]
+        self.array[self.size] = None
+
+        self._min_heapify(0)
+
+    def pop_min(self):
+        min_el = self.get_min()
+        self.delete_min()
+        return min_el
+
+    def _min_heapify(self, index):
+        left = (2 * index) + 1
+        right = (2 * index) + 2
+        smallest = index
+
+        if left < self.size and self.array[left] < self.array[smallest]:
+            smallest = left
+        if right < self.size and self.array[right] < self.array[smallest]:
+            smallest = right
+        if smallest != index:
+            self.array[index], self.array[smallest] = self.array[smallest], self.array[index]
+            self._min_heapify(smallest)
+
+class HuffmanNode:
+    def __init__(self, value = None , frequency = 0):
+        self.frequency = frequency
+        self.value = value
+        self.left = None
+        self.right = None
+
+    def __lt__(self, other):
+        return self.frequency < other.frequency
+
+    def __str__(self):
+        return f"['{self.value}': {self.frequency}]"
 
 
-def test_MinHeap():
-    print('The minHeap is ')
-    minHeap = MinHeap(15)
-    minHeap.insert(5)
-    minHeap.insert(3)
-    minHeap.insert(17)
-    minHeap.insert(10)
-    minHeap.insert(84)
-    minHeap.insert(19)
-    minHeap.insert(6)
-    minHeap.insert(22)
-    minHeap.insert(9)
-    minHeap.min_heap()
-    minHeap.print_heap()
-    print("The Min val is " + str(minHeap.remove()))
+def build_huffman_tree(data):
+    '''
+    Build the huffman tree for data
+    :param data: string data to encode
+    :return: root node of a huffman tree
+    '''
+    frequency_table = {}
+    for ch in data:
+        frequency_table[ch] = frequency_table.get(ch , 0) + 1
+
+    priority_queue = MinHeap()
+    for ch , frequency in frequency_table.items():
+        new_node = HuffmanNode(ch,frequency)
+        priority_queue.insert(new_node)
+
+    while priority_queue.size > 1:
+        node1 = priority_queue.pop_min()
+        node2 = priority_queue.pop_min()
+
+        new_node = HuffmanNode(None,(node1.frequency + node2.frequency))
+        new_node.left = node1
+        new_node.right = node2
+        priority_queue.insert(new_node)
+
+    return priority_queue.get_min()
+
+def generate_code_table(table,node,code):
+    if not node.left and not node.right:
+        table[node.value] = code
+        return table
+    if node.left:
+        generate_code_table(table,node.left,code + LEFT_BIT)
+    if node.right:
+        generate_code_table(table, node.right , code + RIGHT_BIT)
+    return table
 
 
 def huffman_encoding(data):
-    pass
+    if data is None or len(data) == 0:
+        return data, None
+
+    tree = build_huffman_tree(data)
+
+    code_table = generate_code_table({},tree,"")
+    encoded_data = ""
+    for ch in data:
+        encoded_data += code_table[ch]
+    return encoded_data,tree
 
 
 def huffman_decoding(data, tree):
-    pass
+    if data is None:
+        return None
+    decoded_data = ""
+    node = tree
+    for bit in data:
+        if bit == LEFT_BIT:
+            node = node.left
+        elif bit == RIGHT_BIT:
+            node = node.right
+        if not node.left and not node.right:
+            decoded_data += node.value
+            node = tree
+    return decoded_data
 
 
-def frequency_char_in_string(string):
-    frequency = {}
-    for char in string:
-        frequency[char] = string.count(char)
 
-    return frequency
-
-
-def add_tree_nodes_to_heap(frequency_dic):
-    print(frequency_dic)
-    nodes_heap = MinHeap(len(frequency_dic)-1,
-                         md.TreeNode(" ", frequency_dic[" "]))
-
-    for index in frequency_dic:
-
-        node = md.TreeNode(index, frequency_dic[index])
-
-        nodes_heap.insert(node)
-
-    # nodes_heap.print_heap()
-    print(nodes_heap.min_heap())
 
 
 if __name__ == "__main__":
