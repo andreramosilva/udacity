@@ -10,7 +10,7 @@ class Block:
         self.timestamp = timestamp
         self.data = data
         self.previous_hash = previous_hash
-        self.hash = self.calc_hash()
+        self.hash = self.calc_hash(timestamp, data, previous_hash)
 
     def calc_hash(self):
         sha = hashlib.sha256()

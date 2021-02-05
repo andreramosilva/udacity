@@ -21,8 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="1dd05d75-174f-45b9-a691-6aad7dc52771" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/problem_5/explanation_5.md" beforeDir="false" afterPath="$PROJECT_DIR$/problem_5/explanation_5.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/explanation_1.md" beforeDir="false" afterPath="$PROJECT_DIR$/explanation_1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/problem_2/explanation_2.md" beforeDir="false" afterPath="$PROJECT_DIR$/problem_2/explanation_2.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/problem_5/problem_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/problem_5/problem_5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/problem_6/explanation_6.md" beforeDir="false" afterPath="$PROJECT_DIR$/problem_6/explanation_6.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/problem_6/problem_6.py" beforeDir="false" afterPath="$PROJECT_DIR$/problem_6/problem_6.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
