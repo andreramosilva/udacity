@@ -1,5 +1,5 @@
 import sys
-import models as md
+#import models as md
 
 LEFT_BIT = "0"
 RIGHT_BIT = "1"
@@ -9,7 +9,7 @@ class MinHeap:
         self.array = [None] * capacity
         self.size = 0
 
-    def insert(self,value):
+    def insert(self, value):
 
         if self.size == len(self.array):
             new_array = [None] *(2*len(self.array))
@@ -147,7 +147,24 @@ if __name__ == "__main__":
     codes = {}
 
     a_great_sentence = "The bird is the word"
-    add_tree_nodes_to_heap(frequency_char_in_string(a_great_sentence))
+    encode = huffman_encoding(a_great_sentence)
+    print(encode)
+    decode = huffman_decoding(encode,encode[1])
+    print(decode)
+
+    a_great_sentence = "The bird is not the word"
+    encode = huffman_encoding(a_great_sentence)
+    print(encode)
+    decode = huffman_decoding(encode,encode[1])
+    print(decode)
+
+
+    a_great_sentence = "The buddy is the world"
+    encode = huffman_encoding(a_great_sentence)
+    print(encode)
+    decode = huffman_decoding(encode,encode[1])
+    print(decode)
+
     print("The size of the data is: {}\n".format(
         sys.getsizeof(a_great_sentence)))
     print("The content of the data is: {}\n".format(a_great_sentence))

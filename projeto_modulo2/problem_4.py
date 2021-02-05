@@ -31,6 +31,28 @@ child.add_group(sub_child)
 parent.add_group(child)
 
 
+parent1 = Group("parent1")
+child1 = Group("child1")
+sub_child1 = Group("subchild1")
+
+sub_child_user1 = "sub_child_user1"
+sub_child.add_user1(sub_child_user1)
+
+child1.add_group1(sub_child1)
+parent1.add_group1(child1)
+
+
+
+parent2 = Group("parent2")
+child2 = Group("child2")
+sub_child2 = Group("subchild2")
+
+sub_child_user2 = "sub_child_user2"
+sub_child2.add_user2(sub_child_user2)
+
+child2.add_group(sub_child)
+parent2.add_group(child)
+
 
 def is_user_in_group(user, group):
     """
@@ -43,4 +65,8 @@ def is_user_in_group(user, group):
     return user in group.get_users()
     #print(group.get_users())
 
-print(is_user_in_group(sub_child_user,sub_child))    
+print(is_user_in_group(sub_child_user, sub_child))
+
+print(is_user_in_group(sub_child_user1, sub_child1))
+
+print(is_user_in_group(sub_child_user2, sub_child2))
