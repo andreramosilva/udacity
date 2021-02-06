@@ -6,15 +6,17 @@ from _datetime import datetime
 
 class Block:
 
-    def __init__(self, timestamp, data, previous_hash):
+    def __init__(self, timestamp, data, prev, prev_hash):
         self.timestamp = timestamp
         self.data = data
-        self.previous_hash = previous_hash
-        self.hash = self.calc_hash(timestamp, data, previous_hash)
+        self.previous_hash = prev_hash
+        self.prev = prev
+        self.hash = self.calc_hash(timestamp, data )
 
-    def calc_hash(self):
+    def calc_hash(self, time, data):
+        string_toencode = str(time)+str(data)
         sha = hashlib.sha256()
-        hash_str = "We are going to encode this string of data!".encode('utf-8')
+        hash_str = string_toencode.encode('utf-8')
         sha.update(hash_str)
 
         return sha.hexdigest()
@@ -32,9 +34,9 @@ class BlockChain:
 
         if self.head != None:
             prev = self.tail
-            self.tail = Block(timestamp, data, prev)
+            self.tail = Block(timestamp, data, prev,prev.previous_hash)
         else:
-            self.head = Block(timestamp, data, 0)
+            self.head = Block(timestamp, data, 0,0)
             self.tail = self.head
 
     def print_block_chain(self):
@@ -46,7 +48,7 @@ class BlockChain:
             print("data: ", current_block.data)
             print("SHA256 Hash: ", current_block.hash)
             print("Prev Hash: ", current_block.previous_hash)
-            current_block = current_block.previous_hash
+            current_block = current_block.prev
             index += 1
 
 # test case 1 :
@@ -63,45 +65,46 @@ new_block.add_block("7")
 new_block.print_block_chain()
 
 #Example output:
+
 # Index:  0
-# Timestamp:  2021-02-05 09:42:36.457762
+# Timestamp:  2021-02-06 16:55:08.979261
 # data:  7
-# SHA256 Hash:  a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
-# Prev Hash:  <__main__.Block object at 0x7f949a51f310>
+# SHA256 Hash:  fc0cfeabad3d5e784087c5f2ba2c537d1844da0e117604a62a3165183f587a90
+# Prev Hash:  0
 # Index:  1
-# Timestamp:  2021-02-05 09:42:36.457757
+# Timestamp:  2021-02-06 16:55:08.979255
 # data:  6
-# SHA256 Hash:  a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
-# Prev Hash:  <__main__.Block object at 0x7f949a51f2b0>
+# SHA256 Hash:  6c7a92b229674a471c07f0ae30a4973f22feb4c3e66abfdb34524e2690cf91c8
+# Prev Hash:  0
 # Index:  2
-# Timestamp:  2021-02-05 09:42:36.457752
+# Timestamp:  2021-02-06 16:55:08.979249
 # data:  5
-# SHA256 Hash:  a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
-# Prev Hash:  <__main__.Block object at 0x7f949a51f250>
+# SHA256 Hash:  047cd00af24967853115bdb2ce881a2e6df74c52a8e61acbc33e5fb08b6c3c0a
+# Prev Hash:  0
 # Index:  3
-# Timestamp:  2021-02-05 09:42:36.457747
+# Timestamp:  2021-02-06 16:55:08.979244
 # data:  4
-# SHA256 Hash:  a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
-# Prev Hash:  <__main__.Block object at 0x7f949a51f1f0>
+# SHA256 Hash:  f150314c2d377aa07b52e2b134aeb10fcce777914ae1574ff20ecaa5eaec673d
+# Prev Hash:  0
 # Index:  4
-# Timestamp:  2021-02-05 09:42:36.457742
+# Timestamp:  2021-02-06 16:55:08.979237
 # data:  3
-# SHA256 Hash:  a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
-# Prev Hash:  <__main__.Block object at 0x7f949a51f190>
+# SHA256 Hash:  abfb80a670d3535b1bf965bc23f43d7046d7eef9fbfeb6440a73d6b4bbf42c35
+# Prev Hash:  0
 # Index:  5
-# Timestamp:  2021-02-05 09:42:36.457737
+# Timestamp:  2021-02-06 16:55:08.979230
 # data:  2
-# SHA256 Hash:  a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
-# Prev Hash:  <__main__.Block object at 0x7f949a4cc310>
+# SHA256 Hash:  080978d5f29dd7371d06b15ba97bbb683205b830e03775775bb80f80e4ac7701
+# Prev Hash:  0
 # Index:  6
-# Timestamp:  2021-02-05 09:42:36.457729
+# Timestamp:  2021-02-06 16:55:08.979220
 # data:  arbitrary
-# SHA256 Hash:  a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
-# Prev Hash:  <__main__.Block object at 0x7f949a4a0130>
+# SHA256 Hash:  3ac086bacac7af238db3f4f3a51eb8cdd8aa715932323daa3ed3d80a4bf6009f
+# Prev Hash:  0
 # Index:  7
-# Timestamp:  2021-02-05 09:42:36.457687
+# Timestamp:  2021-02-06 16:55:08.979172
 # data:  Genesis
-# SHA256 Hash:  a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
+# SHA256 Hash:  f5dde666020d473e777479dc36b7dd1b3c7dce938921bf694e9527c470385d11
 # Prev Hash:  0
 
 

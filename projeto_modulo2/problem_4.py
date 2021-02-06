@@ -36,10 +36,10 @@ child1 = Group("child1")
 sub_child1 = Group("subchild1")
 
 sub_child_user1 = "sub_child_user1"
-sub_child.add_user1(sub_child_user1)
+sub_child1.add_user(sub_child_user1)
 
-child1.add_group1(sub_child1)
-parent1.add_group1(child1)
+child1.add_group(sub_child1)
+parent1.add_group(child1)
 
 
 
@@ -48,7 +48,7 @@ child2 = Group("child2")
 sub_child2 = Group("subchild2")
 
 sub_child_user2 = "sub_child_user2"
-sub_child2.add_user2(sub_child_user2)
+sub_child2.add_user(sub_child_user2)
 
 child2.add_group(sub_child)
 parent2.add_group(child)
@@ -62,8 +62,16 @@ def is_user_in_group(user, group):
       user(str): user name/id
       group(class:Group): group to check user membership against
     """
-    return user in group.get_users()
-    #print(group.get_users())
+
+
+    if user in group.users:
+        return True
+    for group in group.groups:
+        if is_user_in_group(user, group):
+            return True
+
+    return False
+
 
 print(is_user_in_group(sub_child_user, sub_child))
 

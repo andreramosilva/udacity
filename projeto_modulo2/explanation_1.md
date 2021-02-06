@@ -10,3 +10,5 @@ I search only on the dicionary so is O(1) to find the data
 
 ### Space Complexity:
 <Big O notation with brief explanation>
+is constanst because the input size does not change the amout of space required on each execution.
+O(1)

@@ -12,3 +12,4 @@ To convert is o(n) and o(n) as well to get the intersection because I have to ch
 
 ### Space Complexity:
 <Big O notation with brief explanation>
+o(n)

@@ -11,3 +11,4 @@ but to find a specific block would be o(n)
 ### Space Complexity:
 <Big O notation with brief explanation>
 
+o(n)
