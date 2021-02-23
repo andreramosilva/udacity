@@ -11,12 +11,17 @@ def rearrange_digits(input_list):
     quicksort(input_list)
     num_1_str = ''
     num_2_str = ''
-    for x in input_list:
-        num_1_str+=str(x)
-        num_2_str+=str(x)
-    print(num_1_str)
-    print(num_2_str)
-    print(input_list)
+    max_index = 0
+    max_sum = 0
+    for i in range(len(input_list)):
+        max_num  = input_list.pop()
+        if i%2==0:
+            num_1_str+=str(max_num)
+        else:
+            num_2_str+=str(max_num)
+
+    return [int(num_1_str),int(num_2_str)]
+
 
 #sorting:
 def sort_a_little_bit(items, begin_index, end_index):
@@ -28,7 +33,7 @@ def sort_a_little_bit(items, begin_index, end_index):
 
         item = items[left_index]
 
-        if item >= pivot_value:
+        if item <= pivot_value:
             left_index += 1
             continue
 
@@ -59,6 +64,11 @@ def test_function(test_case):
     else:
         print("Fail")
 
-print(rearrange_digits([1, 2, 3, 4, 5]))
+
 #test_function([[1, 2, 3, 4, 5], [542, 31]])
-#test_case = [[4, 6, 2, 5, 9, 8], [964, 852]]
+test_case1 = [[4, 6, 2, 5, 9, 8], [964, 852]]
+test_case2 = [[4, 0, 1, 5, 9, 8], [951, 840]]
+test_case3 = [[4, 6, 2, 7, 0, 8], [862, 740]]
+test_function(test_case1)
+test_function(test_case2)
+test_function(test_case3)
