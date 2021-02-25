@@ -1,11 +1,11 @@
 ### Design:
 <details about implementation such as data structures and algorithms used>
-For problem 1 I tried a simple approach calculating the square root of the number.
+Transverse only when is needed and is only one transversal 
 
 ### Time Complexity:
 <Big O notation with brief explanation>
-O(1) constant time
+o(log n)
 
 ### Space Complexity:
 <Big O notation with brief explanation>
-o(1)
+o(log n)
