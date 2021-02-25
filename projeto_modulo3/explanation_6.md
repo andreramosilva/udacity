@@ -9,4 +9,5 @@ o(n)
 
 ### Space Complexity:
 <Big O notation with brief explanation>
-o(n)
+o(1) is constant because i only used constant couple helper variables 
+and use them to compare there is no extra space being used.

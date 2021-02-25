@@ -13,6 +13,8 @@ def rearrange_digits(input_list):
     num_2_str = ''
     max_index = 0
     max_sum = 0
+    if len(input_list)<=1:
+        return input_list
     for i in range(len(input_list)):
         max_num  = input_list.pop()
         if i%2==0:
@@ -69,6 +71,12 @@ def test_function(test_case):
 test_case1 = [[4, 6, 2, 5, 9, 8], [964, 852]]
 test_case2 = [[4, 0, 1, 5, 9, 8], [951, 840]]
 test_case3 = [[4, 6, 2, 7, 0, 8], [862, 740]]
+test_case4 = [[], []]
+test_case5 = [[1, 2], [1, 2]]
+test_case6 = [[0, 0], [0, 0]]
 test_function(test_case1)
 test_function(test_case2)
 test_function(test_case3)
+test_function(test_case4)
+test_function(test_case5)
+test_function(test_case6)

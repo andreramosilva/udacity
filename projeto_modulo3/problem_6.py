@@ -5,8 +5,8 @@ def get_min_max(ints):
     Args:
        ints(list): list of integers containing one or more integers
     """
-    min = 9999999999999
-    max = -9999999999999
+    min = float('inf')
+    max = float('inf')
     for number in ints:
         if number > max:
             max = number
@@ -35,3 +35,7 @@ test3 = [i for i in range(5, 7)]  # a list containing 0 - 9
 random.shuffle(test3)
 
 print ("Pass" if ((5, 6) == get_min_max(test3)) else "Fail")
+
+test4 = []
+
+print ("Pass" if (tuple() == get_min_max(test4)) else "Fail")

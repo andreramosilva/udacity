@@ -10,5 +10,5 @@ O(n) because i transverse the input once.
 
 ### Space Complexity:
 <Big O notation with brief explanation>
-O(n**2) because I have to create 3 small 
+O(3*n) or O(n) because I have to create 3 small 
 arrays that together are the size of the original array

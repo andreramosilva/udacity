@@ -15,7 +15,7 @@ def binary_search_rec(arr,number,start,end):
     mid = start + (end-start)//2
 
 
-    if start == end:
+    if start >= end:
         return -1
     elif arr[mid] == number:
 
@@ -55,7 +55,10 @@ test_function([[6, 7, 8, 1, 2, 3, 4], 8])
 test_function([[6, 7, 8, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 10])
 #3
-test_function([[2, 3, 4,5,6, 7, 8, 1], 99])
-test_function([[2, 3, 4,5,6, 7, 8, 1], 10])
+test_function([[2, 3, 4, 5, 6, 7, 8, 1], 99])
+test_function([[2, 3, 4, 5, 6, 7, 8, 1], 10])
+#3
+test_function([[], 1])
+#test_function([[2, 3, 4, 5, 6, 7, 8, 1], 10])
 
 

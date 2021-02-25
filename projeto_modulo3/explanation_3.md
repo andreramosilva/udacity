@@ -10,4 +10,4 @@ I belive is (n log n)
 
 ### Space Complexity:
 <Big O notation with brief explanation>
-here i belive is O(1)  cuz i save some space by ordering the array itself.
+I also belive here is (n log n)

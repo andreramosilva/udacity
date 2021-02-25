@@ -8,4 +8,4 @@ o(log n)
 
 ### Space Complexity:
 <Big O notation with brief explanation>
-o(log n)
+o(1) because the the adicional memory does not grow with the input size.
